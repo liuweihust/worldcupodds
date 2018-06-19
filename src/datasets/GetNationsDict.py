@@ -2,7 +2,7 @@ import csv
 import sys
 import json
 
-datafiles=['../data/wc2006.csv','../data/wc2010.csv','../data/wc2014.csv']
+datafiles=['../data/wc2006.csv','../data/wc2010.csv','../data/wc2014.csv','../data/wc2018.csv']
 outdictfile='../data/nationdict.json'
 
 def Usage(execname):

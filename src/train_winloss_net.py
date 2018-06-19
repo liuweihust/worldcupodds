@@ -31,6 +31,18 @@ tf.app.flags.DEFINE_integer('num_clones', 1,'Number of model clones to deploy.')
 tf.app.flags.DEFINE_boolean('clone_on_cpu', True,'Use CPUs to deploy clones.')
 FLAGS = tf.app.flags.FLAGS
 
+def variable_summaries(var):
+  """Attach a lot of summaries to a Tensor (for TensorBoard visualization)."""
+  with tf.name_scope('summaries'):
+    mean = tf.reduce_mean(var)
+    tf.summary.scalar('mean', mean)
+    with tf.name_scope('stddev'):
+      stddev = tf.sqrt(tf.reduce_mean(tf.square(var - mean)))
+    tf.summary.scalar('stddev', stddev)
+    tf.summary.scalar('max', tf.reduce_max(var))
+    tf.summary.scalar('min', tf.reduce_min(var))
+    tf.summary.histogram('histogram', var)
+
 def main(_):
     dataset = WorldCup.dataset_worldcup()
     dataset.loaddata(FLAGS.dataset_dir)
@@ -46,8 +58,8 @@ def main(_):
     with tf.Graph().as_default():
         global_step = tf.train.create_global_step()
 
-        X = tf.placeholder("float", [None, input_shape],name="input")
-        Y = tf.placeholder("float", [None, input_shape],name="Y")
+        X = tf.placeholder(tf.float32, [None, input_shape],name="input")
+        Y = tf.placeholder(tf.int32, [None,],name="Y")
 
         logits = WinLossNet(X)
         loss = WinLossNetLoss(logits,Y)
@@ -60,13 +72,19 @@ def main(_):
             saver = tf.train.Saver()
 
             writer = tf.summary.FileWriter(FLAGS.train_path, sess.graph)
+            summaries = set(tf.get_collection(tf.GraphKeys.SUMMARIES))
             for loss in tf.get_collection(tf.GraphKeys.LOSSES):
-                summaries.add(tf.summary.scalar(loss.op.name, loss))
+                #summaries.add(tf.summary.scalar(loss.op.name, loss))
+                variable_summaries(loss)
+
+            merged = tf.summary.merge_all()
 
             #saver.restore(sess,ckptfile)
             for epoch in range(FLAGS.max_number_of_steps):
                 Inx,Iny = dataset.GetNextbatch()
-                _, c = sess.run( [optimizer, loss], feed_dict={X:Inx, Y:Iny} )
+                print("In",Inx,Iny)
+                _, c = sess.run( [optimizer, loss], 
+                            feed_dict={X:Inx, Y:np.array(Iny, dtype=np.int32)} )
                 if epoch % FLAGS.log_every_n_steps == 0:
                     print("%d:Test cost:%f"%(epoch,c))
 
