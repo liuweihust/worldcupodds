@@ -1,15 +1,39 @@
 import csv
 import sys
 import json
+import numpy as np
 
+def Score2Res90(rec):
+    if rec['comment'] != '':
+        return [0.,1.,0.]
+    elif rec['hscore'] > rec['gscore']:
+        return [1.,0.,0.]
+    elif rec['hscore'] < rec['gscore']:
+        return [0.,0.,1.]
+    else:
+        return [0.,1.,0.]
+
+def offer2Res90(rec):
+    rsum=0.
+    rsum=rec['hwin']+rec['deuce']+rec['gwin']
+    return [rec['hwin']/rsum,rec['deuce']/rsum,rec['gwin']/rsum]
 
 class dataset_worldcup():
-    def __init__(self):
+    def __init__(self,mode='WDL',batch_size=20):
         self._nationsdict=None
         self._matches={}
-        self._matchfiles={'2006':'../data/wc2006.csv','2010':'../data/wc2010.csv','2014':'../data/wc2014.csv'}
-        self._nationdictfile='../data/nationdict.json'
+        self._datadir='../data/'
+        self._matchfiles={'2006':'wc2006.csv','2010':'wc2010.csv','2014':'wc2014.csv'}
+        self._nationdictfile='nationdict.json'
         self._keys='date time host guest hwin deuce gwin hscore gscore comment'
+        self._mode=mode
+        self._batch_size=batch_size
+        self._data=[]
+        self._matchnum=0
+        self._batchindex=0
+
+    def GetInputShape(self):
+        return 3
 
     def GetNationName(self,nid):
         if self._nationsdict is None:
@@ -29,19 +53,21 @@ class dataset_worldcup():
         else:
             return None
 
-    def loaddata(self):
-        with open(self._nationdictfile,'r') as f:
+    def loaddata(self,datadir='../data/'):
+        with open(self._datadir+self._nationdictfile,'r') as f:
             self._nationsdict=json.load(f)
             f.close()
 
+        lista=[]
         #print(self._matchfiles)
         for (key,dfile) in self._matchfiles.items():
-            f = open(dfile,'r')
+            f = open(self._datadir+dfile,'r')
             reader = csv.reader(f,delimiter=';')
             rows=[row for row in reader]
             lists=[]
             for row in rows:
                 match = {}
+                res=[]
                 match['date']=row[0]
                 match['time']=row[1]
                 match['host']=self.GetNationCode(row[2])
@@ -53,8 +79,15 @@ class dataset_worldcup():
                 match['gscore']=int(row[8])
                 match['comment']=row[9]
                 lists.insert(0,match)
+    
+                if self._mode == 'WDL':
+                    res.extend(offer2Res90(match))
+                    res.extend(Score2Res90(match))
+                    lista.append(res)
+
             self._matches[key]=lists
-        #print(self._matches)
+        self._data=np.array(lista)
+        self._matchnum=self._data.shape[0]
 
     def GetMatchDataByYear(self,year):
         return self._matches[year]
@@ -91,6 +124,26 @@ class dataset_worldcup():
                 sys.stdout.write("%5s"%match['comment'])
                 sys.stdout.write("\n")
 
+    def GetNextbatch(self):
+        if self._batch_size+self._batchindex < self._matchnum:
+            a = self._data[self._batchindex:self._batch_size+self._batchindex,0:3]
+            b = self._data[self._batchindex:self._batch_size+self._batchindex,3:]
+            self._batchindex += self._batch_size
+            if self._batchindex >= self._matchnum:
+                self._batchindex=0
+            return a,b
+        else:
+            a=self._data[self._batchindex:,0:3]
+            b=self._data[self._batchindex:,3:]
+            if self._batch_size + self._batchindex > self._matchnum:
+                aa = self._data[0:self._batch_size + self._batchindex - self._matchnum,0:3]
+                bb = self._data[0:self._batch_size + self._batchindex - self._matchnum,3:]
+                a = np.concatenate(a,aa)
+                b = np.concatenate(b,bb)
+            self._batchindex = 0
+            return a,b
+            
+
 def Usage(execname):
         print("Usage:")
         print(" %s [OutDictfile]"%(execname))
@@ -99,5 +152,9 @@ def Usage(execname):
 if __name__ == '__main__':
     data = dataset_worldcup()
     data.loaddata()
-    #data.PrintNations()
+    data.PrintNations()
     data.PrintMatches()
+
+    for _ in range(20):
+        a,b = data.GetNextbatch()
+        print(a,b)

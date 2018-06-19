@@ -8,8 +8,12 @@ import WinLossNet
 networks_map = {'WinLossNet': WinLossNet.WinLossNet_V1,
                 }
 
+loss_map = {'WinLossNet': WinLossNet.WinLossNet_LOSS_V1,
+                }
+
 
 def get_network(name):
-    """Get a network object from a name.
-    """
     return networks_map[name]
+
+def get_loss(name):
+    return loss_map[name]
