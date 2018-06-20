@@ -19,6 +19,6 @@ def WinLossNet_V1(inputs):
 def WinLossNet_LOSS_V1(logits,Y):
     with tf.variable_scope('WinLossNet_LOSS_V1'):
         #cross_entropy = tf.nn.softmax_cross_entropy_with_logits(labels=Y, logits=logits, name='cross_entropy')
-        #loss = tf.reduce_mean(cross_entropy, name='loss')
-        loss = tf.losses.sparse_softmax_cross_entropy(labels=Y, logits=logits)
+        cross_entropy = tf.losses.sparse_softmax_cross_entropy(labels=Y, logits=logits)
+        loss = tf.reduce_mean(cross_entropy, name='loss')
         return loss

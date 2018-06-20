@@ -79,7 +79,7 @@ class dataset_worldcup():
         #print(self._trainfiles)
         for (key,dfile) in self._trainfiles.items():
             f = open(self._datadir+dfile,'r')
-            reader = csv.reader(f,delimiter=';')
+            reader = csv.reader(f)
             rows=[row for row in reader]
             lists=[]
             for row in rows:
@@ -111,7 +111,7 @@ class dataset_worldcup():
 
         for (key,dfile) in self._testfiles.items():
             f = open(self._datadir+dfile,'r')
-            reader = csv.reader(f,delimiter=';')
+            reader = csv.reader(f)
             rows=[row for row in reader]
             lists=[]
             for row in rows:
@@ -220,7 +220,9 @@ class dataset_worldcup():
                 b = np.concatenate(b,bb)
             self._batchindex = 0
             return a,b
-            
+
+    def GetTestData(self):
+        return self._testdata[:,0:3],self._testdata[:,3]
 
 def Usage(execname):
         print("Usage:")

@@ -18,13 +18,12 @@ from tensorflow.contrib import slim as slim
 #from tensorflow.train import Saver
 
 tf.app.flags.DEFINE_string('model_name', 'WinLossNet', 'The name of the architecture to train.')
-tf.app.flags.DEFINE_integer("training_epochs",10000,'Training epochs')
-tf.app.flags.DEFINE_float('learning_rate', 0.0001,'learning rate')
-tf.app.flags.DEFINE_integer('log_every_n_steps', 10,'')
+tf.app.flags.DEFINE_float('learning_rate', 0.001,'learning rate')
+tf.app.flags.DEFINE_integer('log_every_n_steps', 100,'')
 
 tf.app.flags.DEFINE_string('dataset_name','WorldCup','')
 tf.app.flags.DEFINE_integer('batch_size', 20, 'The number of samples in each batch.')
-tf.app.flags.DEFINE_integer('max_number_of_steps', 1000, 'The number of samples in each batch.')
+tf.app.flags.DEFINE_integer('max_number_of_steps', 100000, 'The number of samples in each batch.')
 tf.app.flags.DEFINE_string('train_path','/Users/liuwei/Documents/svn/worldcupodds/train','')
 tf.app.flags.DEFINE_string('dataset_dir','/Users/liuwei/Documents/svn/worldcupodds/data/','')
 tf.app.flags.DEFINE_integer('num_clones', 1,'Number of model clones to deploy.')
@@ -51,7 +50,7 @@ def main(_):
     input_shape=dataset.GetInputShape()
     ckptfile=FLAGS.train_path+'/model.ckpt'
 
-    tf.logging.set_verbosity(tf.logging.DEBUG)
+    tf.logging.set_verbosity(tf.logging.INFO)
 
     WinLossNet = nets_factory.get_network(FLAGS.model_name)
     WinLossNetLoss = nets_factory.get_loss(FLAGS.model_name)
@@ -79,10 +78,10 @@ def main(_):
 
             merged = tf.summary.merge_all()
 
-            #saver.restore(sess,ckptfile)
+            saver.restore(sess,ckptfile)
             for epoch in range(FLAGS.max_number_of_steps):
                 Inx,Iny = dataset.GetNextbatch()
-                print("In",Inx,Iny)
+                #Inx,Iny = dataset.GetTestData()
                 _, c = sess.run( [optimizer, loss], 
                             feed_dict={X:Inx, Y:np.array(Iny, dtype=np.int32)} )
                 if epoch % FLAGS.log_every_n_steps == 0:
