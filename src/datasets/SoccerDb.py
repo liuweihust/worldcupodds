@@ -17,13 +17,13 @@ def Score2Res90(rec):
     data = pd.DataFrame(data=np.ones(rownum) , columns=['Res90'],dtype=np.int32)
 
     for i in range(rownum):
-        if type(rec['Comments'][i])==type('abc'):
+        if rec['Comments'][i]!=('NRM'):
             continue
-        if math.isnan(rec['Comments'][i]): 
-            if rec['HostGoal'][i] > rec['GuestGoal'][i]:
-                data['Res90'][i] = 2
-            elif rec['HostGoal'][i] < rec['GuestGoal'][i]:
-                data['Res90'][i] = 0
+        
+        if rec['HostGoal'][i] > rec['GuestGoal'][i]:
+            data['Res90'][i] = 2
+        elif rec['HostGoal'][i] < rec['GuestGoal'][i]:
+            data['Res90'][i] = 0
         #1 is preset
     return data
 
@@ -43,7 +43,6 @@ def load_evaldata(data_dir='../data/'):
 
 def load_preddata(data_dir='../data/'):
     data = pd.read_csv(data_dir+predfiles, header=0)
-    print(data)
     x = data[CSV_INPUT_COLUMN_NAMES]
     host = data['Host']
     guest = data['Guest']
@@ -115,12 +114,13 @@ def csv_input_fn(csv_path, batch_size):
     return dataset
 
 if __name__ == '__main__':
-    #(train_x, train_y) = load_traindata()
-    #print(train_x, train_y)
+    (train_x, train_y) = load_traindata()
+    print(train_x, train_y)
 
-    #(eval_x, eval_y) = load_evaldata()
-    #print(eval_x, eval_y)
+    (eval_x, eval_y) = load_evaldata()
+    print(eval_x, eval_y)
 
-    (x,n) = load_preddata()
+    (x,host,guest) = load_preddata()
     print(x)
-    print(n)
+    print(host)
+    print(guest)
