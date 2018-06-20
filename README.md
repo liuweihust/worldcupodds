@@ -1,6 +1,6 @@
 #WorldCup odds
 
-To predict WorldCup matches result, using
+To predict WorldCup matches result, using		
 1.The bet companies's **open odds offer**
 2.Machine Learning method using **Tensorflow**
 
