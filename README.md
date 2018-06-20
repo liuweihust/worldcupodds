@@ -1,11 +1,11 @@
 #WorldCup odds
 
-To predict WorldCup matches result, using		
-1.The bet companies's **open odds offer**
+To predict WorldCup matches result, using</br>
+1.The bet companies's **open odds offer**</br>
 2.Machine Learning method using **Tensorflow**
 
 Tag list:
-* 0.1: used data inlcudes: HostWin,Deuce,GuestWin		
+* 0.1: used data inlcudes: HostWin,Deuce,GuestWin</b>		
 	Result file:data/PredJun20.txt		
 
 License:
