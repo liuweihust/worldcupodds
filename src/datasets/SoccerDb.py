@@ -8,7 +8,7 @@ CSV_LABLEL_COLUMN_NAMES = [ 'HostGoal','GuestGoal','Comments']
 RESULT_NAMES = CSV_INPUT_COLUMN_NAMES
 
 trainfiles='worldcup.csv'
-testfiles='wc2018.csv'
+evalfiles='wc2018.csv'
 
 def Score2Res90(rec):
     rownum = rec.shape[0]
@@ -46,8 +46,8 @@ def load_data(data_dir='../data/',csvfile=None):
 def load_traindata(data_dir='../data/'):
     return load_data(data_dir,trainfiles)
 
-def load_testdata(data_dir='../data/'):
-    return load_data(data_dir,testfiles)
+def load_evaldata(data_dir='../data/'):
+    return load_data(data_dir,evalfiles)
 
 def train_input_fn(features, labels, batch_size):
     """An input function for training"""
@@ -116,4 +116,7 @@ def csv_input_fn(csv_path, batch_size):
 
 if __name__ == '__main__':
     (train_x, train_y) = load_traindata()
-    (test_x, test_y) = load_testdata()
+    print(train_x, train_y)
+
+    (eval_x, eval_y) = load_evaldata()
+    print(eval_x, eval_y)

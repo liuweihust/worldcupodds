@@ -1,14 +1,15 @@
-14 Jun 2018;15:00;Russia;Saudi Arabia;1.46;4.35;9.07;5;0;
-14 Jun 2018;12:00;Egypt;Uruguay;8.44;4.10;1.51;0;1;
-14 Jun 2018;15:00;Morocco;Iran;2.23;2.98;4.17;0;1;
-15 Jun 2018;18:00;Portugal;Spain;4.38;3.28;2.04;3;3;
-15 Jun 2018;10:00;France;Australia;1.27;7.23;10.44;2;1;
-15 Jun 2018;13:00;Argentina;Iceland;1.33;5.41;11.34;1;1;
-15 Jun 2018;16:00;Peru;Denmark;3.71;3.11;2.31;0;1;
-16 Jun 2018;19:00;Croatia;Nigeria;1.68;3.79;6.14;2;0;
-16 Jun 2018;12:00;Costa Rica;Serbia;5.36;3.43;1.84;0;1;
-16 Jun 2018;15:00;Germany;Mexico;1.49;4.58;7.24;0;1;
-17 Jun 2018;18:00;Brazil;Switzerland;1.48;4.43;8.11;1;1;
-17 Jun 2018;15:00;Belgium;Panama;1.22;6.77;17.62;3;0;
-17 Jun 2018;12:00;Sweden;South Korea;2.27;3.05;3.93;1;0;
-17 Jun 2018;18:00;Tunisia;England;8.55;4.23;1.49;1;2;
+Date,Time,Host,Guest,HostWin,Deuce,GuestWin,HostGoal,GuestGoal,Comments
+14 Jun 2018,15:00,Russia,Saudi Arabia,1.46,4.35,9.07,5,0,
+14 Jun 2018,12:00,Egypt,Uruguay,8.44,4.10,1.51,0,1,
+14 Jun 2018,15:00,Morocco,Iran,2.23,2.98,4.17,0,1,
+15 Jun 2018,18:00,Portugal,Spain,4.38,3.28,2.04,3,3,
+15 Jun 2018,10:00,France,Australia,1.27,7.23,10.44,2,1,
+15 Jun 2018,13:00,Argentina,Iceland,1.33,5.41,11.34,1,1,
+15 Jun 2018,16:00,Peru,Denmark,3.71,3.11,2.31,0,1,
+16 Jun 2018,19:00,Croatia,Nigeria,1.68,3.79,6.14,2,0,
+16 Jun 2018,12:00,Costa Rica,Serbia,5.36,3.43,1.84,0,1,
+16 Jun 2018,15:00,Germany,Mexico,1.49,4.58,7.24,0,1,
+17 Jun 2018,18:00,Brazil,Switzerland,1.48,4.43,8.11,1,1,
+17 Jun 2018,15:00,Belgium,Panama,1.22,6.77,17.62,3,0,
+17 Jun 2018,12:00,Sweden,South Korea,2.27,3.05,3.93,1,0,
+17 Jun 2018,18:00,Tunisia,England,8.55,4.23,1.49,1,2,
