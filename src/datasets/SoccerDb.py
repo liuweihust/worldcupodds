@@ -6,7 +6,7 @@ import tensorflow as tf
 CSV_INPUT_COLUMN_NAMES = [ 'HostWin','Deuce','GuestWin']
 CSV_LABLEL_COLUMN_NAMES = [ 'HostGoal','GuestGoal','Comments']
 CSV_NATIONS_COLUMN_NAMES = [ 'Host','Guest']
-RESULT_NAMES = CSV_INPUT_COLUMN_NAMES
+RESULT_NAMES = ['GuestWin','Deuce','HostWin']#2,1,0
 
 trainfiles='worldcup.csv'
 evalfiles='worldcup-eval.csv'
@@ -43,6 +43,7 @@ def load_evaldata(data_dir='../data/'):
 
 def load_preddata(data_dir='../data/'):
     data = pd.read_csv(data_dir+predfiles, header=0)
+    print(data)
     x = data[CSV_INPUT_COLUMN_NAMES]
     host = data['Host']
     guest = data['Guest']
