@@ -9,7 +9,7 @@ CSV_NATIONS_COLUMN_NAMES = [ 'Host','Guest']
 RESULT_NAMES = CSV_INPUT_COLUMN_NAMES
 
 trainfiles='worldcup.csv'
-evalfiles='worldcup.csv'
+evalfiles='worldcup-eval.csv'
 predfiles='wc2018.csv'
 
 def Score2Res90(rec):

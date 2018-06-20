@@ -30,3 +30,65 @@
 28  28 Jun 2018  14:00       Senegal      Colombia     3.81   3.32      2.09
 29  28 Jun 2018  18:00       England       Belgium     2.93   3.33      2.48
 30  28 Jun 2018  18:00        Panama       Tunisia     4.11   3.32      2.01
+
+"Portugal":"Morocco" Prediction is "GuestWin" (74.1%)
+
+"Uruguay":"Saudi Arabia" Prediction is "Deuce" (49.1%)
+
+"Iran":"Spain" Prediction is "Deuce" (100.0%)
+
+"Denmark":"Australia" Prediction is "GuestWin" (64.7%)
+
+"France":"Peru" Prediction is "Deuce" (56.8%)
+
+"Argentina":"Croatia" Prediction is "GuestWin" (67.4%)
+
+"Brazil":"Costa Rica" Prediction is "GuestWin" (92.9%)
+
+"Nigeria":"Iceland" Prediction is "Deuce" (37.8%)
+
+"Serbia":"Switzerland" Prediction is "GuestWin" (40.0%)
+
+"Belgium":"Tunisia" Prediction is "GuestWin" (90.0%)
+
+"South Korea":"Mexico" Prediction is "HostWin" (95.5%)
+
+"Germany":"Sweden" Prediction is "Deuce" (96.1%)
+
+"England":"Panama" Prediction is "Deuce" (73.2%)
+
+"Japan":"Senegal" Prediction is "Deuce" (42.7%)
+
+"Poland":"Colombia" Prediction is "Deuce" (44.2%)
+
+"Saudi Arabia":"Egypt" Prediction is "HostWin" (95.3%)
+
+"Uruguay":"Russia" Prediction is "Deuce" (66.4%)
+
+"Iran":"Portugal" Prediction is "HostWin" (100.0%)
+
+"Spain":"Morocco" Prediction is "GuestWin" (81.4%)
+
+"Australia":"Peru" Prediction is "Deuce" (45.4%)
+
+"Denmark":"France" Prediction is "HostWin" (71.4%)
+
+"Iceland":"Croatia" Prediction is "HostWin" (60.3%)
+
+"Nigeria":"Argentina" Prediction is "HostWin" (100.0%)
+
+"Mexico":"Sweden" Prediction is "Deuce" (50.1%)
+
+"South Korea":"Germany" Prediction is "HostWin" (100.0%)
+
+"Serbia":"Brazil" Prediction is "HostWin" (100.0%)
+
+"Switzerland":"Costa Rica" Prediction is "GuestWin" (54.9%)
+
+"Japan":"Poland" Prediction is "GuestWin" (67.6%)
+
+"Senegal":"Colombia" Prediction is "GuestWin" (46.0%)
+
+"England":"Belgium" Prediction is "HostWin" (51.8%)
+
+"Panama":"Tunisia" Prediction is "HostWin" (41.6%)
