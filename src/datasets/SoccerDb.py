@@ -5,10 +5,12 @@ import tensorflow as tf
 
 CSV_INPUT_COLUMN_NAMES = [ 'HostWin','Deuce','GuestWin']
 CSV_LABLEL_COLUMN_NAMES = [ 'HostGoal','GuestGoal','Comments']
+CSV_NATIONS_COLUMN_NAMES = [ 'Host','Guest']
 RESULT_NAMES = CSV_INPUT_COLUMN_NAMES
 
 trainfiles='worldcup.csv'
-evalfiles='wc2018.csv'
+evalfiles='worldcup.csv'
+predfiles='wc2018.csv'
 
 def Score2Res90(rec):
     rownum = rec.shape[0]
@@ -28,19 +30,9 @@ def Score2Res90(rec):
 def load_data(data_dir='../data/',csvfile=None):
     train_y=[]
 
-    #train_x = pd.read_csv(data_dir+csvfile, names=CSV_INPUT_COLUMN_NAMES, header=0)
     data = pd.read_csv(data_dir+csvfile, header=0)
     x = data[CSV_INPUT_COLUMN_NAMES]
     y = Score2Res90(data[CSV_LABLEL_COLUMN_NAMES])
-    """
-        labeldata = pd.read_csv(data_dir+dfile, names=CSV_LABLEL_COLUMN_NAMES, header=0)
-        y = []
-        for item in traindata:
-            yitem = Score2Res90(item)
-            tf.feature_column.numeric_column(key=key)
-
-            train_y.append(yitem)
-    """
     return (x, y)
 
 def load_traindata(data_dir='../data/'):
@@ -48,6 +40,14 @@ def load_traindata(data_dir='../data/'):
 
 def load_evaldata(data_dir='../data/'):
     return load_data(data_dir,evalfiles)
+
+def load_preddata(data_dir='../data/'):
+    data = pd.read_csv(data_dir+predfiles, header=0)
+    print(data)
+    x = data[CSV_INPUT_COLUMN_NAMES]
+    host = data['Host']
+    guest = data['Guest']
+    return (x,host,guest)
 
 def train_input_fn(features, labels, batch_size):
     """An input function for training"""
@@ -115,8 +115,12 @@ def csv_input_fn(csv_path, batch_size):
     return dataset
 
 if __name__ == '__main__':
-    (train_x, train_y) = load_traindata()
-    print(train_x, train_y)
+    #(train_x, train_y) = load_traindata()
+    #print(train_x, train_y)
 
-    (eval_x, eval_y) = load_evaldata()
-    print(eval_x, eval_y)
+    #(eval_x, eval_y) = load_evaldata()
+    #print(eval_x, eval_y)
+
+    (x,n) = load_preddata()
+    print(x)
+    print(n)

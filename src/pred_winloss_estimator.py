@@ -17,30 +17,24 @@ parser.add_argument('--model_dir', default='/tmp/train/', type=str, help='path t
 def main(argv):
     args = parser.parse_args(argv[1:])
 
+    (pred_x,hosts,guests) = SoccerDb.load_preddata()
     net_fn = nets_factory.get_network(args.model)
-    classifier = net_fn(features=SoccerDb.CSV_INPUT_COLUMN_NAMES,model_dir=args.model_dir)
+    classifier = net_fn(features=pred_x.keys(),model_dir=args.model_dir)
 
     # Generate predictions from the model
-    expected = [ 'HostWin','Deuce','GuestWin']
-    predict_x = {
-        'HostWin':[1.95],
-        'Deuce':[3.57],
-        'GuestWin':[4.31]
-    }
-
     predictions = classifier.predict(
-        input_fn=lambda:SoccerDb.eval_input_fn(predict_x,
+        input_fn=lambda:SoccerDb.eval_input_fn(pred_x,
                                                 labels=None,
                                                 batch_size=args.batch_size))
 
-    template = ('\nPrediction is "{}" ({:.1f}%), expected "{}"')
+    template = ('\n"{}":"{}" Prediction is "{}" ({:.1f}%)')
 
-    for pred_dict, expec in zip(predictions, expected):
+    for n1,n2,pred_dict in zip(hosts,guests,predictions):
         class_id = pred_dict['class_ids'][0]
         probability = pred_dict['probabilities'][class_id]
 
-        print(template.format(SoccerDb.RESULT_NAMES[class_id],
-                              100 * probability, expec))
+        print(template.format(n1,n2,SoccerDb.RESULT_NAMES[class_id],
+                              100 * probability))
 
 
 if __name__ == '__main__':
