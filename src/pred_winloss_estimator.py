@@ -35,9 +35,9 @@ def main(argv):
         probability = pred_dict['probabilities'][class_id]
 
         print(template.format(n1,n2,SoccerDb.RESULT_NAMES[class_id],
-                              100 * pred_dict['probabilities'][0],
+                              100 * pred_dict['probabilities'][2],
                               100 * pred_dict['probabilities'][1],
-                              100 * pred_dict['probabilities'][2])
+                              100 * pred_dict['probabilities'][0])
                             )
 
 

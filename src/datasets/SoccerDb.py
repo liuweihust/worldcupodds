@@ -66,8 +66,9 @@ def load_alltraindata(data_dir='../data/',csvfile=trainfiles):
     result = pd.concat([data,year,mon,day,res], axis=1)
     return result
 
-def load_data(data_dir='../data/',csvfile=None):
-    data = pd.read_csv(data_dir+csvfile, header=0)
+def load_310data(data_dir='../data/',csvfile=None):
+    #data = pd.read_csv(data_dir+csvfile, header=0)
+    data = load_alltraindata(data_dir,data_dir)
     x = data[CSV_INPUT_COLUMN_NAMES]
     y = Score2Res90(data[CSV_LABLEL_COLUMN_NAMES])
 
@@ -83,13 +84,13 @@ def load_data(data_dir='../data/',csvfile=None):
 
     return (x, y)
 
-def load_traindata(data_dir='../data/'):
-    return load_data(data_dir,trainfiles)
+def load_train310data(data_dir='../data/'):
+    return load_310data(data_dir,trainfiles)
 
-def load_evaldata(data_dir='../data/'):
-    return load_data(data_dir,evalfiles)
+def load_eval310data(data_dir='../data/'):
+    return load_310data(data_dir,evalfiles)
 
-def load_preddata(data_dir='../data/'):
+def load_pred310data(data_dir='../data/'):
     data = pd.read_csv(data_dir+predfiles, header=0)
     print(data)
     x = data[CSV_INPUT_COLUMN_NAMES]
@@ -107,7 +108,6 @@ def train_input_fn(features, labels, batch_size):
 
     # Return the dataset.
     return dataset
-
 
 def eval_input_fn(features, labels, batch_size):
     """An input function for evaluation or prediction"""

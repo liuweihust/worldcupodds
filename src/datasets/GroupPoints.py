@@ -51,22 +51,33 @@ def GetHostGuestPts(hscore,gscore):
     else:
         return 0,3
 
+TeamNames=['T1','T2','T3','T4']
+
 class GroupsPoints():
-    def __init__(self,data_dir='../data/',Recompute=False):
+    def __init__(self,data_dir='../data/'):
         self._data_dir = data_dir
         self._matches = None
         self._groups =  Groups.Groups(self._data_dir)
         self._points = {}
+        self._dataframe=None
 
-    def ComputePoints(self,):
+    def loaddata(self):
+        self._dataframe = pd.read_csv(self._data_dir+grouppointfile, header=0)
+
+    def RebuildPoints(self):
         self._matches =  SoccerDb.load_alltraindata(self._data_dir)
         self._groups.LoadFile()
 
         self._matches.sort_values(by=['Year','Month','Day'],inplace=True)
         rownum = self._matches.shape[0]
 
-        year=-1
-        ground=-1
+        DFPoints = pd.DataFrame(data=np.zeros([rownum,len(TeamNames)]),
+                            columns=TeamNames,dtype=np.int32)
+        DFGroup = pd.DataFrame(data=['' for i in range(rownum)],
+                            columns=['Group'],dtype=str)
+        DFRound = pd.DataFrame(data=np.zeros(rownum),
+                            columns=['Round'],dtype=np.int32)
+
         matchnum={}
         for i in range(rownum):
             year = self._matches['Year'][i]
@@ -77,6 +88,8 @@ class GroupsPoints():
             if group!=group2:
                 continue
 
+            nations = self._groups.GetGroupMem(year,group)
+ 
             if not self._points.has_key(year):
                 self._points[year]={}
                 matchnum[year]={}
@@ -89,16 +102,26 @@ class GroupsPoints():
                         self._points[year][gi][0][ni]=0
             
             ground=int(matchnum[year][group]/2)+1
+            DFGroup['Group'][i]=group
+            DFRound['Round'][i]=ground
+
             if matchnum[year][group] %2 == 0:
                 self._points[year][group][ground]=copy.deepcopy(self._points[year][group][ground-1])
+         
+            for j in range(len(TeamNames)): 
+                DFPoints[ TeamNames[j] ][i] = self._points[year][group][ground][ nations[j] ] 
 
             hp,gp = GetHostGuestPts(self._matches['HostGoal'][i],self._matches['GuestGoal'][i])
             self._points[year][group][ground][host]+=hp
             self._points[year][group][ground][guest]+=gp
             matchnum[year][group] += 1
+
+        self._dataframe = pd.concat([DFGroup,DFRound,DFPoints], axis=1)
+        print(self._dataframe)
     
     def GetPoints(self,year,group,ground,T1,T2,T3):
-        return self._points[year][group][ground]
+        #return self._points[year][group][ground]
+        return self._dataframe[year][group][ground]
         #return [0,0,0,0]
 
     def PrintPoints(self):
@@ -115,19 +138,28 @@ class GroupsPoints():
                     for nation in self._groups.GetGroupMem(year,group):
                        sys.stdout.write("%18d"%self._points[year][group][ground][nation])
                     sys.stdout.write("\n")
-        
+    
+    def ExportFile(self,csvfile,WithMatch=False):
+        if WithMatch:
+            res = pd.concat([self._dataframe,self._matches],axis=1)
+            res.to_csv(self._data_dir+csvfile) 
+        else:
+            self._dataframe.to_csv(self._data_dir+csvfile) 
 
 if __name__ == '__main__':
-    gp = GroupsPoints(Recompute=True)
-    gp.ComputePoints()
+    gp = GroupsPoints()
+    gp.loaddata()
+    gp.ExportFile('grouppointfile',WithMatch=False)
 
-    year=2006
-    group='A'
+    year=2018
+    group='B'
     ground=2
-    M1='Germany'
-    M2='Sweden'
-    #pts = gp.GetPoints(year=year,group=group,ground=ground,T1=M1,T2=M2)
-    #print("Year:%d Group:%s Round:%d Team:%s vs %s pts="%(year,group,ground,M1,M2))
-    #print(pts) 
+    M1='Portugal'
+    M2='Spain'
+    pts = gp.GetPoints(year=year,group=group,ground=ground,T1=M1,T2=M2,T3=M2)
+    print("Year:%d Group:%s Round:%d Team:%s vs %s pts="%(year,group,ground,M1,M2))
+    print(pts) 
 
-    gp.PrintPoints()
+    #gp.RebuildPoints()
+    #gp.PrintPoints()
+    gp.ExportFile('1grouppointfile',WithMatch=True)
