@@ -27,14 +27,18 @@ def main(argv):
                                                 labels=None,
                                                 batch_size=args.batch_size))
 
-    template = ('\n"{}":"{}" Prediction is "{}" ({:.1f}%)')
+    SoccerDb.PrintDict()
+    template = ('\n"{}":"{}" Prediction is "{}" ({:.1f}% {:.1f}% {:.1f}%)')
 
     for n1,n2,pred_dict in zip(hosts,guests,predictions):
         class_id = pred_dict['class_ids'][0]
         probability = pred_dict['probabilities'][class_id]
 
         print(template.format(n1,n2,SoccerDb.RESULT_NAMES[class_id],
-                              100 * probability))
+                              100 * pred_dict['probabilities'][0],
+                              100 * pred_dict['probabilities'][1],
+                              100 * pred_dict['probabilities'][2])
+                            )
 
 
 if __name__ == '__main__':

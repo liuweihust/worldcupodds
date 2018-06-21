@@ -12,7 +12,7 @@ parser.add_argument('--batch_size', default=100, type=int, help='batch size')
 parser.add_argument('--model', default='dnn', type=str, help='model:dnn,handmade,default:dnn')
 parser.add_argument('--train_steps', default=60000, type=int,
                     help='number of training steps')
-parser.add_argument('--model_dir', default='/tmp/train/', type=str, help='path to save train model')
+parser.add_argument('--model_dir', default='../train/', type=str, help='path to save train model')
 
 def main(argv):
     args = parser.parse_args(argv[1:])

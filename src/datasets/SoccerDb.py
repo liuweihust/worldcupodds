@@ -6,11 +6,27 @@ import tensorflow as tf
 CSV_INPUT_COLUMN_NAMES = [ 'HostWin','Deuce','GuestWin']
 CSV_LABLEL_COLUMN_NAMES = [ 'HostGoal','GuestGoal','Comments']
 CSV_NATIONS_COLUMN_NAMES = [ 'Host','Guest']
-RESULT_NAMES = ['GuestWin','Deuce','HostWin']#2,1,0
+RESULT_NAMES = ['GuestWin','Deuce','HostWin']#0,1,2
 
 trainfiles='worldcup.csv'
 evalfiles='worldcup-eval.csv'
 predfiles='wc2018.csv'
+
+def PrintDict():
+    for i,v in enumerate(RESULT_NAMES):
+        print("ID:%d = Name:%s"%(i,v))
+
+def Score2Res(rec):
+    rownum = rec.shape[0]
+    data = pd.DataFrame(data=np.ones(rownum) , columns=['Res'],dtype=np.int32)
+
+    for i in range(rownum):
+        if rec['HostGoal'][i] > rec['GuestGoal'][i]:
+            data['Res'][i] = 2
+        elif rec['HostGoal'][i] < rec['GuestGoal'][i]:
+            data['Res'][i] = 0
+        #1 is preset
+    return data
 
 def Score2Res90(rec):
     rownum = rec.shape[0]
@@ -27,12 +43,44 @@ def Score2Res90(rec):
         #1 is preset
     return data
 
-def load_data(data_dir='../data/',csvfile=None):
-    train_y=[]
+def GetDate(data):
+    rownum = data.shape[0]
+    year = pd.DataFrame(data=np.zeros(rownum) , columns=['Year'],dtype=np.int32)
+    mon = pd.DataFrame(data=np.zeros(rownum) , columns=['Month'],dtype=np.int32)
+    day = pd.DataFrame(data=np.zeros(rownum) , columns=['Day'],dtype=np.int32)
 
+    for i in range(rownum):
+        date = pd.to_datetime(data['Date'][i])
+        year['Year'][i] = date.year
+        mon['Month'][i] = date.month
+        day['Day'][i] = date.day
+
+    return year,mon,day
+
+def load_alltraindata(data_dir='../data/',csvfile=trainfiles):
+    data = pd.read_csv(data_dir+csvfile, header=0)
+    x = data[CSV_INPUT_COLUMN_NAMES]
+    res = Score2Res(data[CSV_LABLEL_COLUMN_NAMES])
+
+    (year,mon,day) = GetDate(data)
+    result = pd.concat([data,year,mon,day,res], axis=1)
+    return result
+
+def load_data(data_dir='../data/',csvfile=None):
     data = pd.read_csv(data_dir+csvfile, header=0)
     x = data[CSV_INPUT_COLUMN_NAMES]
     y = Score2Res90(data[CSV_LABLEL_COLUMN_NAMES])
+
+    (year,mon,day) = GetDate(data)
+    #result = pd.concat([data,year,mon,day], axis=1, ignore_index=True)
+    result = pd.concat([data,year,mon,day], axis=1)
+    print(result)
+    """
+    data['Year'] = year
+    data['Month'] = mon
+    data['Day'] = day
+    """
+
     return (x, y)
 
 def load_traindata(data_dir='../data/'):
@@ -118,10 +166,10 @@ if __name__ == '__main__':
     (train_x, train_y) = load_traindata()
     print(train_x, train_y)
 
-    (eval_x, eval_y) = load_evaldata()
-    print(eval_x, eval_y)
+    #(eval_x, eval_y) = load_evaldata()
+    #print(eval_x, eval_y)
 
-    (x,host,guest) = load_preddata()
-    print(x)
-    print(host)
-    print(guest)
+    #(x,host,guest) = load_preddata()
+    #print(x)
+    #print(host)
+    #print(guest)

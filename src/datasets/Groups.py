@@ -33,6 +33,12 @@ class Groups():
 
             self._data[year][group]=members
 
+    def GetGroupNames(self,year=2018):
+        return self._data[year].keys()
+    
+    def GetGroupMem(self,year,group):
+        return self._data[year][group]
+ 
     def GetData(self):
         return self._data
     
@@ -60,7 +66,9 @@ if __name__ == '__main__':
     data = rdata.GetData()
     print(data)
 
+    print(rdata.GetGroupNames(2014))
     print(rdata.GetGroup('Germany',2014))
+    print(rdata.GetGroupMem(2014,'G'))
     print(rdata.InSameGroup('Italy','Brazil',2014))
     print(rdata.InSameGroup('Italy','England',2014))
 
