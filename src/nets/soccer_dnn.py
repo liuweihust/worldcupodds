@@ -2,7 +2,7 @@ import tensorflow as tf
 
 WinLossNet_V1_Param=[3,32,64,128,256,3]
 
-def SoccerDnnNet_V1(features,num_layer=3,num_size=128,learning_rate=0.01,model_dir='/tmp/train'):
+def SoccerDnnNet_V1(features,num_layer=3,num_size=128,learning_rate=0.001,model_dir='/tmp/train'):
     my_feature_columns = []
     for key in features:
         my_feature_columns.append(tf.feature_column.numeric_column(key=key))

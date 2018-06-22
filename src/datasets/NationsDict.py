@@ -7,7 +7,7 @@ import numpy as np
 nationfile='nations.csv'
 
 matchfilekey=['Host','Guest']
-matchfiles=['worldcup.csv','worldcup-eval.csv','wc2018.csv']
+matchfiles=['worldcup_group.csv','worldcup_final.csv','worldcup_pred.csv']
 
 groupfilekey=['M1','M2','M3','M4']
 groupfile='group.csv'

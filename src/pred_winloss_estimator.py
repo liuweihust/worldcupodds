@@ -11,7 +11,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--batch_size', default=100, type=int, help='batch size')
 parser.add_argument('--train_steps', default=1000, type=int,
                     help='number of training steps')
-parser.add_argument('--dataset', default='Pts', type=str, help='dataset:310,Pts')
+parser.add_argument('--dataset', default='310', type=str, help='dataset:310,Pts')
 parser.add_argument('--datadir', default='../data/', type=str, help='which path csv data located')
 parser.add_argument('--model', default='dnn', type=str, help='model:dnn,handmade,default:dnn')
 parser.add_argument('--model_dir', default='/tmp/train/', type=str, help='path to save train model')
