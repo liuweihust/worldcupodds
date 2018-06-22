@@ -11,7 +11,7 @@ RESULT_NAMES = ['GuestWin','Deuce','HostWin']#0,1,2
 #trainfiles='worldcup.csv'
 trainfiles=['worldcup_group.csv','worldcup_final.csv']
 evalfiles='worldcup-eval.csv'
-predfiles='wc2018.csv'
+predfiles='worldcup_pred.csv'
 
 def PrintDict():
     for i,v in enumerate(RESULT_NAMES):
