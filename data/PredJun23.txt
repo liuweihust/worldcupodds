@@ -1,0 +1,73 @@
+Will do:pred with 310 at /tmp/train310/ learning_rate=0.001 steps=20000
+      Year  Month    Day  Time Group  Round          Host ... HostWin  Deuce  GuestWin  T1  T2  T3  T4
+2018     6     23  12:00    27     G      2       Belgium ...    1.37   4.92     10.79   0   0   0   0
+2018     6     23  15:00    28     F      2   South Korea ...    5.88   3.67      1.72   0   0   0   0
+2018     6     23  18:00    29     F      2       Germany ...    1.57   4.24      6.66   0   0   0   0
+2018     6     24  12:00    30     G      2       England ...    1.20   6.85     20.08   0   0   0   0
+2018     6     24  15:00    31     H      2         Japan ...    3.72   3.29      2.18   0   0   0   0
+2018     6     24  18:00    32     H      2        Poland ...    3.49   3.50      2.18   0   0   0   0
+2018     6     25  14:00    33     A      3  Saudi Arabia ...    5.52   3.95      1.65   0   0   0   0
+2018     6     25  14:00    34     A      3       Uruguay ...    2.43   3.07      3.27   0   0   0   0
+2018     6     25  18:00    35     B      3          Iran ...    9.06   4.85      1.37   0   0   0   0
+2018     6     25  18:00    36     B      3         Spain ...    1.34   5.12      9.95   0   0   0   0
+2018     6     26  14:00    37     C      3     Australia ...    3.69   3.36      2.11   0   0   0   0
+2018     6     26  14:00    38     C      3       Denmark ...    5.24   3.72      1.72   0   0   0   0
+2018     6     26  18:00    39     D      3       Iceland ...    4.82   3.60      1.79   0   0   0   0
+2018     6     26  18:00    40     D      3       Nigeria ...    9.80   5.17      1.34   0   0   0   0
+2018     6     27  14:00    41     E      3        Mexico ...    2.28   3.24      3.41   0   0   0   0
+2018     6     27  14:00    42     E      3   South Korea ...   15.66   7.03      1.20   0   0   0   0
+2018     6     27  18:00    43     F      3        Serbia ...    8.23   4.78      1.41   0   0   0   0
+2018     6     27  18:00    44     F      3   Switzerland ...    1.74   3.54      5.44   0   0   0   0
+2018     6     28  14:00    45     G      3         Japan ...    4.20   3.50      1.93   0   0   0   0
+2018     6     28  14:00    46     G      3       Senegal ...    3.81   3.32      2.09   0   0   0   0
+2018     6     28  18:00    47     H      3       England ...    2.93   3.33      2.48   0   0   0   0
+2018     6     28  18:00    48     H      3        Panama ...    4.11   3.32      2.01   0   0   0   0
+
+[22 rows x 15 columns]
+ID:0 = Name:GuestWin
+ID:1 = Name:Deuce
+ID:2 = Name:HostWin
+
+"Belgium":"Tunisia" Prediction is "HostWin" (89.4% 10.6% 0.0%)
+
+"South Korea":"Mexico" Prediction is "GuestWin" (0.3% 0.0% 99.7%)
+
+"Germany":"Sweden" Prediction is "Deuce" (0.0% 69.3% 30.7%)
+
+"England":"Panama" Prediction is "HostWin" (100.0% 0.0% 0.0%)
+
+"Japan":"Senegal" Prediction is "Deuce" (0.1% 99.3% 0.6%)
+
+"Poland":"Colombia" Prediction is "Deuce" (0.0% 99.8% 0.2%)
+
+"Saudi Arabia":"Egypt" Prediction is "GuestWin" (0.0% 0.0% 100.0%)
+
+"Uruguay":"Russia" Prediction is "GuestWin" (0.0% 14.0% 86.0%)
+
+"Iran":"Portugal" Prediction is "GuestWin" (0.0% 0.0% 100.0%)
+
+"Spain":"Morocco" Prediction is "HostWin" (100.0% 0.0% 0.0%)
+
+"Australia":"Peru" Prediction is "Deuce" (0.0% 100.0% 0.0%)
+
+"Denmark":"France" Prediction is "GuestWin" (0.0% 2.4% 97.6%)
+
+"Iceland":"Croatia" Prediction is "GuestWin" (0.0% 0.3% 99.7%)
+
+"Nigeria":"Argentina" Prediction is "GuestWin" (0.0% 0.0% 100.0%)
+
+"Mexico":"Sweden" Prediction is "GuestWin" (2.3% 34.6% 63.1%)
+
+"South Korea":"Germany" Prediction is "GuestWin" (0.0% 0.0% 100.0%)
+
+"Serbia":"Brazil" Prediction is "GuestWin" (0.0% 0.0% 100.0%)
+
+"Switzerland":"Costa Rica" Prediction is "GuestWin" (24.3% 0.1% 75.6%)
+
+"Japan":"Poland" Prediction is "HostWin" (99.7% 0.0% 0.3%)
+
+"Senegal":"Colombia" Prediction is "Deuce" (0.1% 98.9% 1.1%)
+
+"England":"Belgium" Prediction is "Deuce" (0.0% 83.8% 16.2%)
+
+"Panama":"Tunisia" Prediction is "HostWin" (97.5% 0.4% 2.1%)

@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import math
 import tensorflow as tf
-import SoccerDb
+import Soccer310Db
 import Groups
 import sys
 import copy
@@ -62,10 +62,10 @@ class GroupsPoints():
         self._dataframe=None
 
     def loaddata(self):
-        self._dataframe = pd.read_csv(self._data_dir+grouppointfile, header=0)
+        self._dataframe = pd.read_csv(self._data_dir+grouppointfile, header=0,index_col=0)
 
     def RebuildPoints(self):
-        self._matches =  SoccerDb.load_alltraindata(self._data_dir)
+        self._matches =  Soccer310Db.load_grouptraindata(self._data_dir)
         self._groups.LoadFile()
 
         self._matches.sort_values(by=['Year','Month','Day'],inplace=True)
@@ -77,14 +77,25 @@ class GroupsPoints():
                             columns=['Group'],dtype=str)
         DFRound = pd.DataFrame(data=np.zeros(rownum),
                             columns=['Round'],dtype=np.int32)
+        DFNo = pd.DataFrame(data=np.zeros(rownum),
+                            columns=['No'],dtype=np.int32)
 
         matchnum={}
+        prevyear=0
         for i in range(rownum):
             year = self._matches['Year'][i]
             host = self._matches['Host'][i]
             guest = self._matches['Guest'][i]
             group = self._groups.GetGroup(host,year)
             group2 = self._groups.GetGroup(guest,year)
+            
+            if year != prevyear:
+                matchno=1
+            else:
+                matchno += 1
+            prevyear=year
+            DFNo['No'][i]=matchno
+
             if group!=group2:
                 continue
 
@@ -116,9 +127,12 @@ class GroupsPoints():
             self._points[year][group][ground][guest]+=gp
             matchnum[year][group] += 1
 
-        self._dataframe = pd.concat([DFGroup,DFRound,DFPoints], axis=1)
+        self._dataframe = pd.concat([DFNo,DFGroup,DFRound,DFPoints], axis=1)
         print(self._dataframe)
     
+    def GetAllPointsData(self):
+        return self._dataframe
+
     def GetPoints(self,year,group,ground,T1,T2,T3):
         #return self._points[year][group][ground]
         return self._dataframe[year][group][ground]
@@ -139,6 +153,9 @@ class GroupsPoints():
                        sys.stdout.write("%18d"%self._points[year][group][ground][nation])
                     sys.stdout.write("\n")
     
+    def PrintFramePoints(self):
+        print(self._dataframe)
+
     def ExportFile(self,csvfile,WithMatch=False):
         if WithMatch:
             res = pd.concat([self._dataframe,self._matches],axis=1)
@@ -148,9 +165,17 @@ class GroupsPoints():
 
 if __name__ == '__main__':
     gp = GroupsPoints()
-    gp.loaddata()
-    gp.ExportFile('grouppointfile',WithMatch=False)
+    #gp.loaddata()
 
+    gp.RebuildPoints()
+    #gp.PrintPoints()
+    
+    gp.ExportFile('1grouppoint.csv',WithMatch=False)
+
+    #gp.PrintFramePoints()
+    a=gp.GetAllPointsData()
+    print(a)
+    """
     year=2018
     group='B'
     ground=2
@@ -159,7 +184,4 @@ if __name__ == '__main__':
     pts = gp.GetPoints(year=year,group=group,ground=ground,T1=M1,T2=M2,T3=M2)
     print("Year:%d Group:%s Round:%d Team:%s vs %s pts="%(year,group,ground,M1,M2))
     print(pts) 
-
-    #gp.RebuildPoints()
-    #gp.PrintPoints()
-    gp.ExportFile('1grouppointfile',WithMatch=True)
+    """
