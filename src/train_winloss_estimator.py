@@ -18,6 +18,7 @@ parser.add_argument('--model_dir', default='/tmp/train/', type=str, help='path t
 parser.add_argument('--learning_rate', default=0.001, type=float, help='learning rate')
 parser.add_argument('--num_layer', default=3, type=int, help='dnn layer num')
 parser.add_argument('--num_size', default=128, type=int, help='neuron number')
+parser.add_argument('--dropout', default=None, type=float, help='drop out rate when training, to prevent over fit')
 
 def main(argv):
     args = parser.parse_args(argv[1:])

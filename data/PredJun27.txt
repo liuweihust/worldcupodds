@@ -1,0 +1,41 @@
+Will do:pred with 310 at /tmp/train310/ learning_rate=0.001 steps=30000
+      Year  Month    Day  Time Group  Round         Host       Guest  HostWin  Deuce  GuestWin
+2018     6     27  14:00    41     E      3       Mexico      Sweden     2.38   3.36      3.25
+2018     6     27  14:00    42     E      3  South Korea     Germany    15.58   7.54      1.20
+2018     6     27  18:00    43     F      3       Serbia      Brazil     6.79   4.38      1.54
+2018     6     27  18:00    44     F      3  Switzerland  Costa Rica     1.66   3.55      6.84
+2018     6     28  14:00    45     G      3        Japan      Poland     4.20   3.50      1.93
+2018     6     28  14:00    46     G      3      Senegal    Colombia     3.81   3.32      2.09
+2018     6     28  18:00    47     H      3      England     Belgium     2.93   3.33      2.48
+2018     6     28  18:00    48     H      3       Panama     Tunisia     4.11   3.32      2.01
+2018     6     30  14:00    49     Z      1       France   Argentina     2.38   3.09      3.48
+2018     6     30  18:00    50     Z      1      Uruguay    Portugal     2.73   2.97      3.07
+2018     7      1  14:00    51     Z      1        Spain      Russia     1.62   3.88      6.54
+2018     7      1  18:00    52     Z      1      Croatia     Denmark     1.87   3.33      5.02
+ID:0 = Name:GuestWin
+ID:1 = Name:Deuce
+ID:2 = Name:HostWin
+
+"Mexico":"Sweden" Prediction is "GuestWin" (0.3% 13.5% 86.2%)
+
+"South Korea":"Germany" Prediction is "GuestWin" (0.0% 0.0% 100.0%)
+
+"Serbia":"Brazil" Prediction is "GuestWin" (0.0% 0.0% 100.0%)
+
+"Switzerland":"Costa Rica" Prediction is "HostWin" (100.0% 0.0% 0.0%)
+
+"Japan":"Poland" Prediction is "HostWin" (100.0% 0.0% 0.0%)
+
+"Senegal":"Colombia" Prediction is "Deuce" (0.0% 98.0% 2.0%)
+
+"England":"Belgium" Prediction is "Deuce" (0.0% 95.5% 4.5%)
+
+"Panama":"Tunisia" Prediction is "HostWin" (100.0% 0.0% 0.0%)
+
+"France":"Argentina" Prediction is "Deuce" (0.1% 85.8% 14.1%)
+
+"Uruguay":"Portugal" Prediction is "GuestWin" (0.0% 9.0% 91.0%)
+
+"Spain":"Russia" Prediction is "Deuce" (44.3% 55.4% 0.3%)
+
+"Croatia":"Denmark" Prediction is "GuestWin" (30.9% 0.1% 69.0%)

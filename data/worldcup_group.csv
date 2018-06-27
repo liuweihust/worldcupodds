@@ -1,4 +1,4 @@
-Year,Month,Day,Time,,Group,Round,Host,Guest,HostWin,Deuce,GuestWin,HostGoal,GuestGoal,Comments
+Year,Month,Day,Time,No,Group,Round,Host,Guest,HostWin,Deuce,GuestWin,HostGoal,GuestGoal,Comments
 2006,6,9,16:00,1,A,1,Germany,Costa Rica,1.25,5.17,12.23,4,2,NRM
 2006,6,9,19:00,2,A,1,Poland,Ecuador,1.9,3.25,3.75,0,2,NRM
 2006,6,10,13:00,3,B,1,England,Paraguay,1.66,3.42,5.85,1,0,NRM
@@ -140,3 +140,14 @@ Year,Month,Day,Time,,Group,Round,Host,Guest,HostWin,Deuce,GuestWin,HostGoal,Gues
 2018,6,23,12:00,27,G,2,Belgium,Tunisia,1.37,4.92,10.79,5,2,NRM
 2018,6,23,15:00,28,F,2,South Korea,Mexico,5.88,3.67,1.72,1,2,NRM
 2018,6,23,18:00,29,F,2,Germany,Sweden,1.57,4.24,6.66,2,1,NRM
+2018,6,24,12:00,30,G,2,England,Panama,1.23,6.52,17.74,6,1,NRM
+2018,6,24,15:00,31,H,2,Japan,Senegal,3.38,3.18,2.42,2,2,NRM
+2018,6,24,18:00,32,H,2,Poland,Colombia,3.68,3.40,2.42,0,3,NRM
+2018,6,25,14:00,33,A,3,Saudi Arabia,Egypt,4.62,3.57,1.88,2,1,NRM
+2018,6,25,14:00,34,A,3,Uruguay,Russia,2.58,3.11,3.10,3,0,NRM
+2018,6,25,18:00,35,B,3,Iran,Portugal,5.99,3.66,1.70,1,1,NRM
+2018,6,25,18:00,36,B,3,Spain,Morocco,1.34,5.12,9.95,2,2,NRM
+2018,6,26,14:00,37,C,3,Australia,Peru,3.14,3.49,2.36,0,2,NRM
+2018,6,26,14:00,38,C,3,Denmark,France,5.00,2.75,2.15,0,0,NRM
+2018,6,26,18:00,39,D,3,Iceland,Croatia,3.46,3.4,2.23,1,2,NRM
+2018,6,26,18:00,40,D,3,Nigeria,Argentina,6.49,4.58,1.52,1,2,NRM

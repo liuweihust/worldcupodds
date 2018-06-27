@@ -73,6 +73,8 @@ class GroupsPoints():
 
         DFPoints = pd.DataFrame(data=np.zeros([rownum,len(TeamNames)]),
                             columns=TeamNames,dtype=np.int32)
+        DFYear = pd.DataFrame(data=np.zeros(rownum),
+                            columns=['Year'],dtype=np.int32)
         DFGroup = pd.DataFrame(data=['' for i in range(rownum)],
                             columns=['Group'],dtype=str)
         DFRound = pd.DataFrame(data=np.zeros(rownum),
@@ -95,6 +97,7 @@ class GroupsPoints():
                 matchno += 1
             prevyear=year
             DFNo['No'][i]=matchno
+            DFYear['Year'][i]=year
 
             if group!=group2:
                 continue
@@ -127,7 +130,7 @@ class GroupsPoints():
             self._points[year][group][ground][guest]+=gp
             matchnum[year][group] += 1
 
-        self._dataframe = pd.concat([DFNo,DFGroup,DFRound,DFPoints], axis=1)
+        self._dataframe = pd.concat([DFNo,DFYear,DFGroup,DFRound,DFPoints], axis=1)
         print(self._dataframe)
     
     def GetAllPointsData(self):
