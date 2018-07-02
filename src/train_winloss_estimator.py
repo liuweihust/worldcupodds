@@ -6,6 +6,7 @@ import argparse
 import tensorflow as tf
 from datasets import dataset_factory
 from nets import nets_factory
+from tensorflow.python.ops import nn
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--batch_size', default=100, type=int, help='batch size')
@@ -16,6 +17,7 @@ parser.add_argument('--train_steps', default=20000, type=int,
                     help='number of training steps')
 parser.add_argument('--model_dir', default='/tmp/train/', type=str, help='path to save train model')
 parser.add_argument('--learning_rate', default=0.001, type=float, help='learning rate')
+parser.add_argument('--activation_fn', default='relu', type=str, help='activation function:relu,sigmoid')
 parser.add_argument('--num_layer', default=3, type=int, help='dnn layer num')
 parser.add_argument('--num_size', default=128, type=int, help='neuron number')
 parser.add_argument('--dropout', default=None, type=float, help='drop out rate when training, to prevent over fit')
@@ -30,6 +32,7 @@ def main(argv):
     classifier = net_fn(features=train_x.keys(),
                         model_dir=args.model_dir,
                         learning_rate=args.learning_rate,
+                        activation=args.activation_fn,
                         num_size=args.num_size,
                         num_layer=args.num_layer
                         )

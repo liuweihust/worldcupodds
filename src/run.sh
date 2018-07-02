@@ -11,7 +11,7 @@ mode='train'
 data='310'
 modelpath='/tmp/train310/'
 learning_rate=0.001
-train_steps=30000
+train_steps=20000
 
 if [ $# -ge 1 ]; then
 	mode=$1
@@ -29,25 +29,26 @@ echo "Will do:$mode with $data at $modelpath learning_rate=$learning_rate steps=
 
 case "$data" in
 	"310")
-		mode_param="--num_layer 4 --num_size 256"
+		net_param="--num_layer 4 --num_size 128"
 		;;
 	"pts")
-		mode_param="--num_layer 4 --num_size 256"
+		net_param="--num_layer 4 --num_size 256"
 		;;
 	*)
 		echo "Error mode"
 		;;
 esac
 
-
 case "$mode" in
 	"train")
 		python train_winloss_estimator.py --dataset $data --model_dir $modelpath	\
 			$net_param --learning_rate=$learning_rate --train_steps=$train_steps	\
-			--dropout 0.3
+			--dropout 0.4 								\
+			#--activation_fn sigmoid
 		;;
 	"pred")
-		python pred_winloss_estimator.py --dataset $data --model_dir $modelpath
+		python pred_winloss_estimator.py --dataset $data --model_dir $modelpath		\
+		$net_param
 		;;
 	*)
 		echo "Error mode"

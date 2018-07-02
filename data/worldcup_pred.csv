@@ -1,14 +1,7 @@
 Year,Month,Day,Time,Group,Round,Host,Guest,HostWin,Deuce,GuestWin
-2018,6,27,14:00,41,E,3,Mexico,Sweden,2.38,3.36,3.25
-2018,6,27,14:00,42,E,3,South Korea,Germany,15.58,7.54,1.2
-2018,6,27,18:00,43,F,3,Serbia,Brazil,6.79,4.38,1.54
-2018,6,27,18:00,44,F,3,Switzerland,Costa Rica,1.66,3.55,6.84
-2018,6,28,14:00,45,G,3,Japan,Poland,2.89,3.09,2.82
-2018,6,28,14:00,46,G,3,Senegal,Colombia,4.76,3.68,1.83
-2018,6,28,18:00,47,H,3,England,Belgium,2.65,2.99,3.22
-2018,6,28,18:00,48,H,3,Panama,Tunisia,4.57,3.74,1.85
-2018,6,30,14:00,49,Z,1,France,Argentina,2.38,3.09,3.48
-2018,6,30,18:00,50,Z,1,Uruguay,Portugal,2.73,2.97,3.07
-2018,7,1,14:00,51,Z,1,Spain,Russia,1.62,3.88,6.54
-2018,7,1,18:00,52,Z,1,Croatia,Denmark,1.87,3.33,5.02
-
+2018,7,1,14:00,51,Z,1,Spain,Russia,1.60,3.99,6.55
+2018,7,1,18:00,52,Z,1,Croatia,Denmark,1.80,3.42,5.64
+2018,7,2,14:00,53,Z,1,Brazil,Mexico,1.52,4.2,7.69
+2018,7,2,18:00,54,Z,1,Belgium,Japan,1.41,4.66,9.72
+2018,7,3,14:00,55,Z,1,Sweden,Switzerland,3.13,2.97,2.68
+2018,7,3,18:00,56,Z,1,Colombia,England,4.12,3.18,2.12
