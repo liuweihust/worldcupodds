@@ -14,18 +14,29 @@ Blow code will show the real result,offer result and pred result along 2018's ma
 """
 data = SoccerRawDb.load_allrawdata()
 data2018 = data[ data['Year']==2018 ]
-x = data2018['No']
+x = data2018['No'].values
 y_offer = utils.TopOffer(data2018)
-y_result = utils.Score2Res(data2018)
+y_result = utils.Score2Res(data2018).values.reshape([-1])
 
 odds = SoccerRawDb.load_oddsdata()
 y_odds = odds['Odds1'].values
 x_odds = odds['No'].values
 
+"""
 plt.plot(x, y_offer, 'bo-',label='Offer')
 plt.plot(x, y_result, 'go-',label='result')
-plt.plot(x_odds, y_odds, 'r',label='Odds')
+plt.plot(x_odds, y_odds, 'ro-',label='Odds')
 plt.legend()
+"""
+width=0.3
+fig, ax = plt.subplots()
+rects1 = ax.bar(x, y_result, width, color='g')
+rects2 = ax.bar(x+width, y_offer, width, color='b')
+rects3 = ax.bar(x_odds+width*2, y_odds, width, color='r')
+ax.set_ylabel('Result')
+ax.set_xticks(x + width)
+#plt.legend()
+ax.legend((rects1[0], rects2[0],rects3[0]), ('Real', 'Offer','Odds'))
 plt.show()
 
 """
@@ -49,7 +60,6 @@ for i in range(0,len(offers)):
 """
 Blow code snippet compute the company's highest probability of single match,
 Compare with the real reault and print correct and wrong odds
-"""
 correct_idx=np.where(results.reshape([-1,])==oddidx)[0]
 wrong_idx=np.where(results.reshape([-1,])!=oddidx)[0]
 
@@ -59,12 +69,12 @@ for i in range(0,len(correct_idx)):
 
 for i in range(0,len(wrong_idx)):
     print("%d:Offer %f,%f,%f,odds=%d,result=%d"%(i,offers[wrong_idx[i]][0],offers[wrong_idx[i]][1],offers[wrong_idx[i]][2],oddidx[wrong_idx[i]],results[wrong_idx[i]]))
+"""
 
 """
 Blow code will show the matchness of the odds offer and real result,
 3 axis represent the HostWin,Deuce,GuestWin offers, and red points means correct,
 blue ones means wrong
-"""
 
 fig = plt.figure() 
 ax = plt.axes(projection='3d') 
@@ -76,3 +86,4 @@ for c, m, idx in [('r', 'o', correct_idx), ('b', '^', wrong_idx)]:
     ax.scatter(offers[idx,0], offers[idx,1], offers[idx,2], c=c, marker=m)
 
 plt.show()
+"""
