@@ -10,7 +10,7 @@ mode='train'
 #mode='pred'
 data='310'
 modelpath='/tmp/train310/'
-learning_rate=0.001
+learning_rate=0.01
 train_steps=20000
 
 if [ $# -ge 1 ]; then
@@ -43,7 +43,8 @@ case "$mode" in
 	"train")
 		python train_winloss_estimator.py --dataset $data --model_dir $modelpath	\
 			$net_param --learning_rate=$learning_rate --train_steps=$train_steps	\
-			--dropout 0.4 								\
+			--dropout 0.3 								\
+			--batch_size 64								\
 			#--activation_fn sigmoid
 		;;
 	"pred")
