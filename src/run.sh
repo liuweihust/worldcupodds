@@ -10,7 +10,7 @@ mode='train'
 #mode='pred'
 data='310'
 modelpath='/tmp/train310/'
-learning_rate=0.01
+learning_rate=0.003
 train_steps=20000
 
 if [ $# -ge 1 ]; then
